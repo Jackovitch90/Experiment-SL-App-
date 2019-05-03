@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>SL Trains</title>
+</head>
+<body>
+
+<div id="Tunnelbana"></div>
+
+
+
+<script language="javascript">
+
+const url = "https://cors-anywhere.herokuapp.com/http://api.sl.se/api2/realtimedeparturesV4.JSON?key=f459c34481344368ae80b0681d76dbcc&siteid=9193&timewindow=15";
+
+const info = document.getElementById('Tunnelbana');
+
+fetch(url)
+.then((resp) => resp.json())
+.then(function (data)
+{
+    let train = data.ResponseData.Metros
+    return train.map(function (trainobj)
+    {
+        info.innerHTML += `Tågnummer: ${trainobj.LineNumber} 
+                           Linje: ${trainobj.GroupOfLine} 
+                           Tid: ${trainobj.DisplayTime} 
+                           Avikelse: ${trainobj.Deviations}<br>`;
+    })
+
+
+})
+
+    
+</script>
+
+</body>
+</html>
